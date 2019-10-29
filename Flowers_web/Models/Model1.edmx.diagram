@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5751f16cf3cb4512bc14857c79699212" Name="Diagram1">
+        <EntityTypeShape EntityType="flowersModel.Address" Width="1.5" PointX="1.5" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Bouquet" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Cust2" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Customer" Width="1.5" PointX="0.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Driver" Width="1.5" PointX="0.75" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Flo_Order" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Florist" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Group" Width="1.5" PointX="7.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Invoice" Width="1.5" PointX="5.25" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Order_Del" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Payment_Methods" Width="1.5" PointX="3" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Promedic" Width="1.5" PointX="8.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Statistic" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.User" Width="1.5" PointX="10" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="flowersModel.Warehouse" Width="1.5" PointX="3" PointY="17.25" IsExpanded="true" />
+        <AssociationConnector Association="flowersModel.FK_Cust2_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_FLO_ORDE_RELATIONS_BOUQUET" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_Order_Del_Bouquet" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_FLO_ORDE_RELATIONS_CUST2" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_Order_Del_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_FLO_ORDE_RELATIONS_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_PAYMENT__RELATIONS_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_FLO_ORDE_RELATIONS_DRIVER" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_Order_Del_Driver" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_FLO_ORDE_RELATIONS_FLORIST" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_INVOICE_RELATIONS_FLO_ORDE" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_STATISTI_RELATIONS_FLO_ORDE" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_Order_Del_Florist" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_WAREHOUS_RELATIONS_FLORIST" ManuallyRouted="false" />
+        <AssociationConnector Association="flowersModel.FK_Users_Group" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

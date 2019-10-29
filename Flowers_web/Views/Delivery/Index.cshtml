@@ -1,0 +1,232 @@
+﻿@model Flowers_web.Models.Delivery
+
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+}
+<head>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.2.0/mapbox.css' rel='stylesheet' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+
+<script>
+    $(document).ready(function () {
+       // alert('draw!');
+         // Map('460	Boul Alexandre-Taché	Gatineau	J9A 1M7');
+       var count =@Html.Raw(Json.Encode(Model.OrderList.Count));
+       //alert(count);
+        if (count == 0) { }
+        else {
+            var address =@Html.Raw(Json.Encode(Model.OrderList.FirstOrDefault()?.Cust2.Address.Address_ZIPCODE));
+            
+            //var address @*=@Html.Raw(Json.Encode(string.Format("", Model.OrderList[0].Cust2.Address.Address_City)));*@
+           //alert(address);
+            Map(address);
+        }
+    });
+    function Map(address) {
+       
+        mapboxgl.accessToken = 'pk.eyJ1IjoieXVyaWs0MTI1IiwiYSI6ImNqdzlsbTZsNzAwaGQ0OHA5MnJlOGVoencifQ.wpJYzRXFExMTTYPaENCwZw';
+        // eslint-disable-next-line no-undef
+        var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+        mapboxClient.geocoding.forwardGeocode({
+            query: address,//'460	Boul Alexandre-Taché	Gatineau	J9A 1M7',
+            autocomplete: false,
+            limit: 1
+        })
+            .send()
+            .then(function (response) {
+                if (response && response.body && response.body.features && response.body.features.length) {
+                    var feature = response.body.features[0];
+
+                    var map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/mapbox/streets-v11',
+                        center: feature.center,
+                        zoom: 10
+                    });
+                    new mapboxgl.Marker()
+                        .setLngLat(feature.center)
+                        .addTo(map);
+                }
+            });
+    }
+
+  
+
+                                                //mapboxgl.accessToken = 'pk.eyJ1IjoieXVyaWs0MTI1IiwiYSI6ImNqdzlsbTZsNzAwaGQ0OHA5MnJlOGVoencifQ.wpJYzRXFExMTTYPaENCwZw';
+
+                                                //var map = new mapboxgl.Map({
+                                                //    container: 'map',
+                                                //    style: 'mapbox://styles/mapbox/light-v10',
+                                                //    center: [-75.764954, 45.460258],
+                                                //    zoom: 3
+                                                //});
+                                                //var marker = new mapboxgl.Marker()
+                                                //    .setLngLat([-75.764954, 45.460258])
+                                                //    .addTo(map);
+
+                        // code from the next step will go here!
+
+</script>
+
+<h2>Index</h2>
+@using (Html.BeginForm("GetOrders", "Delivery", FormMethod.Post))
+{
+    @*@Html.TextArea("searching")*@
+    <input type="date" id="searching" name="searching" value="@DateTime.Now.ToString("03/17/2019")" />
+    @*<select class="form-control" id="searching" name="searching">
+            <option>OK</option>
+            <option>Payed</option>
+            <option selected></option>
+        </select>
+        <select class="form-control" id="searching" name="searching">
+            <option>@DateTime.Today</option>
+            <option>Payed</option>
+            <option selected></option>
+        </select>*@
+    <input type="submit" value="submit" />
+}
+@using (Html.BeginForm("SetDrivers", "Delivery", FormMethod.Post))
+
+{
+    @Html.LabelFor(d => d.ComboDr1, "ComboDr1")
+    @Html.DropDownListFor(model => model.ComboDr1,
+    new SelectList(Model.Drivers, "Driver_ID", "Driver_Fname") as SelectList)
+
+
+
+    @Html.LabelFor(d => d.Driver2, "Driver2")
+    @Html.DropDownListFor(model => model.Driver2, new SelectList(Model.Drivers, "Driver_ID", "Driver_Fname") as SelectList)
+
+    <input type="submit" value="Send" />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Driver.Driver_Fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Order_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Cust2.Address.Address_Numder_Appartment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Cust2.Address.Address_Number_Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Cust2.Address.Address_Name_Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Order_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Bouquet_Quontity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Date_Delived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Order_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Total_Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Size_Bouquets)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Bouquet.Bouquet_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Cust2.Fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Driver.Driver_DLicence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderList[0].Florist.Frorist_Fname)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model.OrderList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Driver.Driver_Fname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cust2.Address.Address_Numder_Appartment)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cust2.Address.Address_Number_Street)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cust2.Address.Address_Name_Street)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bouquet_Quontity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date_Delived)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order_Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total_Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Size_Bouquets)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bouquet.Bouquet_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cust2.Fname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Driver.Driver_DLicence)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Florist.Frorist_Fname)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Order_ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Order_ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Order_ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+}
+<div id="demo" class="w-full" allowfullscreen="" mozallowfullscreen="true" webkitallowfullscreen="true"
+     style="height: 400px;">
+
+    <script src='~/Scripts/Mapbox.js'></script>
+
+
+
+    <div id='map' style="width:100%;height:400px;"></div>
+
+
+
+
+</div>
+
+
+
+

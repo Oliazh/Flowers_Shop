@@ -1,0 +1,60 @@
+﻿@model Flowers_web.Models.Delivery
+
+@{
+    ViewBag.Title = "SetDrivers";
+}
+
+<h2>SetDrivers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    
+
+@foreach (var item in Model.OrderList) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DriverName)
+        </td>
+       
+    </tr>
+    <tr>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Routes[0].OrderId)
+                </th>
+                <th> @Html.DisplayNameFor(model => model.Routes[0].Status)</th>
+                <th> @Html.DisplayNameFor(model => model.Routes[0].EndAddress)</th>
+                <th> @Html.DisplayNameFor(model => model.Routes[0].Distance)</th>
+                <th> @Html.DisplayNameFor(model => model.Routes[0].Time)</th>
+            </tr>
+
+            @foreach (var item2 in item.Routes)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.OrderId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.Status)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item2.EndAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.Distance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item2.Time)
+                </td>
+            </tr>
+            }
+
+        </table>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,1117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="flowersModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Address_ID" />
+          </Key>
+          <Property Name="Address_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address_Numder_Appartment" Type="varchar" MaxLength="50" />
+          <Property Name="Address_Number_Street" Type="varchar" MaxLength="50" />
+          <Property Name="Address_Name_Street" Type="varchar" MaxLength="50" />
+          <Property Name="Address_City" Type="varchar" MaxLength="20" />
+          <Property Name="Address_ZIPCODE" Type="varchar" MaxLength="7" />
+          <Property Name="Address_State" Type="varchar" MaxLength="20" />
+          <Property Name="Address_Country" Type="varchar" MaxLength="20" />
+          <Property Name="Address_line1" Type="varchar" MaxLength="50" />
+          <Property Name="Address_line2" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Bouquet">
+          <Key>
+            <PropertyRef Name="Bouquet_ID" />
+          </Key>
+          <Property Name="Bouquet_ID" Type="int" Nullable="false" />
+          <Property Name="Bouquet_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Bouquet_Price_S" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Bouquet_Price_M" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Bouquet_Price_L" Type="decimal" Precision="4" Scale="2" />
+          <Property Name="Bouquet_Size" Type="char" MaxLength="1" />
+          <Property Name="Bouquet_Pictures" Type="image" />
+        </EntityType>
+        <EntityType Name="Cust2">
+          <Key>
+            <PropertyRef Name="Cust_ID" />
+          </Key>
+          <Property Name="Cust_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fname" Type="varchar" MaxLength="50" />
+          <Property Name="Lname" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Address_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cust_ID" />
+          </Key>
+          <Property Name="Cust_ID" Type="int" Nullable="false" />
+          <Property Name="Cust_Fname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Cust_Lname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cust_Midname" Type="varchar" MaxLength="50" />
+          <Property Name="Cust_Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cust_Login" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Cust_Sex" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="Cust_Password" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Cust_Phone" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Driver_ID" />
+          </Key>
+          <Property Name="Driver_ID" Type="int" Nullable="false" />
+          <Property Name="Driver_DLicence" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Driver_Fname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Driver_Lname" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Driver_Adress" Type="varchar" MaxLength="50" />
+          <Property Name="Driver_Phone" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Flo_Order">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="int" Nullable="false" />
+          <Property Name="Bouquet_ID" Type="int" Nullable="false" />
+          <Property Name="Florist_ID" Type="int" Nullable="false" />
+          <Property Name="Cust_ID" Type="int" Nullable="false" />
+          <Property Name="Driver_ID" Type="int" Nullable="false" />
+          <Property Name="Order_Date" Type="datetime" />
+          <Property Name="Bouquet_Quontity" Type="numeric" Precision="2" Scale="0" />
+          <Property Name="Date_a206yuriyed" Type="datetime" />
+          <Property Name="Order_Status" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Florist">
+          <Key>
+            <PropertyRef Name="Florist_ID" />
+          </Key>
+          <Property Name="Florist_ID" Type="int" Nullable="false" />
+          <Property Name="Frorist_Fname" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Frorist_Lname" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Frorist_Address" Type="varchar" MaxLength="50" />
+          <Property Name="Frorist_Phone" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_Group" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isEnable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Invoice_ID" />
+          </Key>
+          <Property Name="Invoice_ID" Type="int" Nullable="false" />
+          <Property Name="Order_ID" Type="int" Nullable="false" />
+          <Property Name="Invoice_Total" Type="decimal" Precision="5" Scale="0" />
+          <Property Name="DateOfIssue" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Order_Del">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bouquet_ID" Type="int" Nullable="false" />
+          <Property Name="Florist_ID" Type="int" Nullable="false" />
+          <Property Name="Cust_ID" Type="int" Nullable="false" />
+          <Property Name="Driver_ID" Type="int" Nullable="false" />
+          <Property Name="Order_Date" Type="datetime" />
+          <Property Name="Bouquet_Quontity" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Date_Delived" Type="datetime" />
+          <Property Name="Order_Status" Type="varchar" MaxLength="50" />
+          <Property Name="Total_Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Size_Bouquets" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Payment_Methods">
+          <Key>
+            <PropertyRef Name="PM_ID" />
+          </Key>
+          <Property Name="PM_ID" Type="int" Nullable="false" />
+          <Property Name="Cust_ID" Type="int" Nullable="false" />
+          <Property Name="card_number" Type="numeric" Precision="16" Scale="0" Nullable="false" />
+          <Property Name="date_from" Type="datetime" Nullable="false" />
+          <Property Name="CVV" Type="numeric" Precision="3" Scale="0" />
+        </EntityType>
+        <EntityType Name="Promedic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="FName" Type="varchar" MaxLength="50" />
+          <Property Name="LName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Statistic">
+          <Key>
+            <PropertyRef Name="Stat_ID" />
+          </Key>
+          <Property Name="Stat_ID" Type="int" Nullable="false" />
+          <Property Name="Order_ID" Type="int" Nullable="false" />
+          <Property Name="Sold" Type="int" />
+          <Property Name="Return" Type="int" />
+          <Property Name="Investigation" Type="int" />
+          <Property Name="Stat_Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="User_Name" Type="nchar" MaxLength="10" />
+          <Property Name="User_Pass" Type="nchar" MaxLength="10" />
+          <Property Name="User_Status" Type="bit" />
+          <Property Name="User_of_Group" Type="int" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="Warehouse_ID" />
+          </Key>
+          <Property Name="Warehouse_ID" Type="int" Nullable="false" />
+          <Property Name="Florist_ID" Type="int" Nullable="false" />
+          <Property Name="Warehouse_Name" Type="varchar" MaxLength="20" />
+          <Property Name="Warehouse_City" Type="varchar" MaxLength="20" />
+          <Property Name="Warehouse_Address" Type="varchar" MaxLength="20" />
+          <Property Name="Warehouse_Phone" Type="numeric" Precision="10" Scale="0" />
+          <Property Name="Warehouse_Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Cust2_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Cust2" Type="Self.Cust2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Address_ID" />
+            </Principal>
+            <Dependent Role="Cust2">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_BOUQUET">
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquet">
+              <PropertyRef Name="Bouquet_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Bouquet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_CUST2">
+          <End Role="Cust2" Type="Self.Cust2" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cust2">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_CUSTOMER">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_DRIVER">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Driver_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Driver_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_FLORIST">
+          <End Role="Florist" Type="Self.Florist" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Florist">
+              <PropertyRef Name="Florist_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Florist_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVOICE_RELATIONS_FLO_ORDE">
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flo_Order">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Del_Bouquet">
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="1" />
+          <End Role="Order_Del" Type="Self.Order_Del" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquet">
+              <PropertyRef Name="Bouquet_ID" />
+            </Principal>
+            <Dependent Role="Order_Del">
+              <PropertyRef Name="Bouquet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Del_Customer">
+          <End Role="Cust2" Type="Self.Cust2" Multiplicity="1" />
+          <End Role="Order_Del" Type="Self.Order_Del" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cust2">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Order_Del">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Del_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+          <End Role="Order_Del" Type="Self.Order_Del" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Driver_ID" />
+            </Principal>
+            <Dependent Role="Order_Del">
+              <PropertyRef Name="Driver_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Del_Florist">
+          <End Role="Florist" Type="Self.Florist" Multiplicity="1" />
+          <End Role="Order_Del" Type="Self.Order_Del" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Florist">
+              <PropertyRef Name="Florist_ID" />
+            </Principal>
+            <Dependent Role="Order_Del">
+              <PropertyRef Name="Florist_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAYMENT__RELATIONS_CUSTOMER">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Payment_Methods" Type="Self.Payment_Methods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Payment_Methods">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATISTI_RELATIONS_FLO_ORDE">
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="1" />
+          <End Role="Statistic" Type="Self.Statistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flo_Order">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Statistic">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="User_of_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WAREHOUS_RELATIONS_FLORIST">
+          <End Role="Florist" Type="Self.Florist" Multiplicity="1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Florist">
+              <PropertyRef Name="Florist_ID" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="Florist_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="flowersModelStoreContainer">
+          <EntitySet Name="Address" EntityType="Self.Address" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bouquet" EntityType="Self.Bouquet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cust2" EntityType="Self.Cust2" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Flo_Order" EntityType="Self.Flo_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Florist" EntityType="Self.Florist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order_Del" EntityType="Self.Order_Del" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment_Methods" EntityType="Self.Payment_Methods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promedic" EntityType="Self.Promedic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statistic" EntityType="Self.Statistic" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cust2_Address" Association="Self.FK_Cust2_Address">
+            <End Role="Address" EntitySet="Address" />
+            <End Role="Cust2" EntitySet="Cust2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_BOUQUET" Association="Self.FK_FLO_ORDE_RELATIONS_BOUQUET">
+            <End Role="Bouquet" EntitySet="Bouquet" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_CUST2" Association="Self.FK_FLO_ORDE_RELATIONS_CUST2">
+            <End Role="Cust2" EntitySet="Cust2" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_CUSTOMER" Association="Self.FK_FLO_ORDE_RELATIONS_CUSTOMER">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_DRIVER" Association="Self.FK_FLO_ORDE_RELATIONS_DRIVER">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_FLORIST" Association="Self.FK_FLO_ORDE_RELATIONS_FLORIST">
+            <End Role="Florist" EntitySet="Florist" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_RELATIONS_FLO_ORDE" Association="Self.FK_INVOICE_RELATIONS_FLO_ORDE">
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+            <End Role="Invoice" EntitySet="Invoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Del_Bouquet" Association="Self.FK_Order_Del_Bouquet">
+            <End Role="Bouquet" EntitySet="Bouquet" />
+            <End Role="Order_Del" EntitySet="Order_Del" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Del_Customer" Association="Self.FK_Order_Del_Customer">
+            <End Role="Cust2" EntitySet="Cust2" />
+            <End Role="Order_Del" EntitySet="Order_Del" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Del_Driver" Association="Self.FK_Order_Del_Driver">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Order_Del" EntitySet="Order_Del" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Del_Florist" Association="Self.FK_Order_Del_Florist">
+            <End Role="Florist" EntitySet="Florist" />
+            <End Role="Order_Del" EntitySet="Order_Del" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENT__RELATIONS_CUSTOMER" Association="Self.FK_PAYMENT__RELATIONS_CUSTOMER">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Payment_Methods" EntitySet="Payment_Methods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATISTI_RELATIONS_FLO_ORDE" Association="Self.FK_STATISTI_RELATIONS_FLO_ORDE">
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+            <End Role="Statistic" EntitySet="Statistic" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Group" Association="Self.FK_Users_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WAREHOUS_RELATIONS_FLORIST" Association="Self.FK_WAREHOUS_RELATIONS_FLORIST">
+            <End Role="Florist" EntitySet="Florist" />
+            <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="flowersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="Address_ID" />
+          </Key>
+          <Property Name="Address_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address_Numder_Appartment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Number_Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Name_Street" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address_ZIPCODE" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Address_State" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address_Country" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Address_line1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_line2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cust2" Relationship="Self.FK_Cust2_Address" FromRole="Address" ToRole="Cust2" />
+        </EntityType>
+        <EntityType Name="Bouquet">
+          <Key>
+            <PropertyRef Name="Bouquet_ID" />
+          </Key>
+          <Property Name="Bouquet_ID" Type="Int32" Nullable="false" />
+          <Property Name="Bouquet_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Bouquet_Price_S" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Bouquet_Price_M" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Bouquet_Price_L" Type="Decimal" Precision="4" Scale="2" />
+          <Property Name="Bouquet_Size" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="Bouquet_Pictures" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Flo_Order" Relationship="Self.FK_FLO_ORDE_RELATIONS_BOUQUET" FromRole="Bouquet" ToRole="Flo_Order" />
+          <NavigationProperty Name="Order_Del" Relationship="Self.FK_Order_Del_Bouquet" FromRole="Bouquet" ToRole="Order_Del" />
+        </EntityType>
+        <EntityType Name="Cust2">
+          <Key>
+            <PropertyRef Name="Cust_ID" />
+          </Key>
+          <Property Name="Cust_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address_ID" Type="Int32" />
+          <NavigationProperty Name="Address" Relationship="Self.FK_Cust2_Address" FromRole="Cust2" ToRole="Address" />
+          <NavigationProperty Name="Flo_Order" Relationship="Self.FK_FLO_ORDE_RELATIONS_CUST2" FromRole="Cust2" ToRole="Flo_Order" />
+          <NavigationProperty Name="Order_Del" Relationship="Self.FK_Order_Del_Customer" FromRole="Cust2" ToRole="Order_Del" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cust_ID" />
+          </Key>
+          <Property Name="Cust_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cust_Fname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cust_Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cust_Midname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cust_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cust_Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cust_Sex" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Cust_Password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Cust_Phone" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Flo_Order" Relationship="Self.FK_FLO_ORDE_RELATIONS_CUSTOMER" FromRole="Customer" ToRole="Flo_Order" />
+          <NavigationProperty Name="Payment_Methods" Relationship="Self.FK_PAYMENT__RELATIONS_CUSTOMER" FromRole="Customer" ToRole="Payment_Methods" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Driver_ID" />
+          </Key>
+          <Property Name="Driver_ID" Type="Int32" Nullable="false" />
+          <Property Name="Driver_DLicence" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Driver_Fname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Driver_Lname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Driver_Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Driver_Phone" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Flo_Order" Relationship="Self.FK_FLO_ORDE_RELATIONS_DRIVER" FromRole="Driver" ToRole="Flo_Order" />
+          <NavigationProperty Name="Order_Del" Relationship="Self.FK_Order_Del_Driver" FromRole="Driver" ToRole="Order_Del" />
+        </EntityType>
+        <EntityType Name="Flo_Order">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="Int32" Nullable="false" />
+          <Property Name="Bouquet_ID" Type="Int32" Nullable="false" />
+          <Property Name="Florist_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cust_ID" Type="Int32" Nullable="false" />
+          <Property Name="Driver_ID" Type="Int32" Nullable="false" />
+          <Property Name="Order_Date" Type="DateTime" Precision="3" />
+          <Property Name="Bouquet_Quontity" Type="Decimal" Precision="2" Scale="0" />
+          <Property Name="Date_a206yuriyed" Type="DateTime" Precision="3" />
+          <Property Name="Order_Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Bouquet" Relationship="Self.FK_FLO_ORDE_RELATIONS_BOUQUET" FromRole="Flo_Order" ToRole="Bouquet" />
+          <NavigationProperty Name="Cust2" Relationship="Self.FK_FLO_ORDE_RELATIONS_CUST2" FromRole="Flo_Order" ToRole="Cust2" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_FLO_ORDE_RELATIONS_CUSTOMER" FromRole="Flo_Order" ToRole="Customer" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_FLO_ORDE_RELATIONS_DRIVER" FromRole="Flo_Order" ToRole="Driver" />
+          <NavigationProperty Name="Florist" Relationship="Self.FK_FLO_ORDE_RELATIONS_FLORIST" FromRole="Flo_Order" ToRole="Florist" />
+          <NavigationProperty Name="Invoices" Relationship="Self.FK_INVOICE_RELATIONS_FLO_ORDE" FromRole="Flo_Order" ToRole="Invoice" />
+          <NavigationProperty Name="Statistics" Relationship="Self.FK_STATISTI_RELATIONS_FLO_ORDE" FromRole="Flo_Order" ToRole="Statistic" />
+        </EntityType>
+        <EntityType Name="Florist">
+          <Key>
+            <PropertyRef Name="Florist_ID" />
+          </Key>
+          <Property Name="Florist_ID" Type="Int32" Nullable="false" />
+          <Property Name="Frorist_Fname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Frorist_Lname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Frorist_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Frorist_Phone" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <NavigationProperty Name="Flo_Order" Relationship="Self.FK_FLO_ORDE_RELATIONS_FLORIST" FromRole="Florist" ToRole="Flo_Order" />
+          <NavigationProperty Name="Order_Del" Relationship="Self.FK_Order_Del_Florist" FromRole="Florist" ToRole="Order_Del" />
+          <NavigationProperty Name="Warehouses" Relationship="Self.FK_WAREHOUS_RELATIONS_FLORIST" FromRole="Florist" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_Group" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isEnable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Group" FromRole="Group" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Invoice_ID" />
+          </Key>
+          <Property Name="Invoice_ID" Type="Int32" Nullable="false" />
+          <Property Name="Order_ID" Type="Int32" Nullable="false" />
+          <Property Name="Invoice_Total" Type="Decimal" Precision="5" Scale="0" />
+          <Property Name="DateOfIssue" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Flo_Order" Relationship="Self.FK_INVOICE_RELATIONS_FLO_ORDE" FromRole="Invoice" ToRole="Flo_Order" />
+        </EntityType>
+        <EntityType Name="Order_Del">
+          <Key>
+            <PropertyRef Name="Order_ID" />
+          </Key>
+          <Property Name="Order_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bouquet_ID" Type="Int32" Nullable="false" />
+          <Property Name="Florist_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cust_ID" Type="Int32" Nullable="false" />
+          <Property Name="Driver_ID" Type="Int32" Nullable="false" />
+          <Property Name="Order_Date" Type="DateTime" Precision="3" />
+          <Property Name="Bouquet_Quontity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Date_Delived" Type="DateTime" Precision="3" />
+          <Property Name="Order_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Total_Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Size_Bouquets" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Bouquet" Relationship="Self.FK_Order_Del_Bouquet" FromRole="Order_Del" ToRole="Bouquet" />
+          <NavigationProperty Name="Cust2" Relationship="Self.FK_Order_Del_Customer" FromRole="Order_Del" ToRole="Cust2" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_Order_Del_Driver" FromRole="Order_Del" ToRole="Driver" />
+          <NavigationProperty Name="Florist" Relationship="Self.FK_Order_Del_Florist" FromRole="Order_Del" ToRole="Florist" />
+        </EntityType>
+        <EntityType Name="Payment_Methods">
+          <Key>
+            <PropertyRef Name="PM_ID" />
+          </Key>
+          <Property Name="PM_ID" Type="Int32" Nullable="false" />
+          <Property Name="Cust_ID" Type="Int32" Nullable="false" />
+          <Property Name="card_number" Type="Decimal" Precision="16" Scale="0" Nullable="false" />
+          <Property Name="date_from" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CVV" Type="Decimal" Precision="3" Scale="0" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_PAYMENT__RELATIONS_CUSTOMER" FromRole="Payment_Methods" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Promedic">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Statistic">
+          <Key>
+            <PropertyRef Name="Stat_ID" />
+          </Key>
+          <Property Name="Stat_ID" Type="Int32" Nullable="false" />
+          <Property Name="Order_ID" Type="Int32" Nullable="false" />
+          <Property Name="Sold" Type="Int32" />
+          <Property Name="Return" Type="Int32" />
+          <Property Name="Investigation" Type="Int32" />
+          <Property Name="Stat_Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Flo_Order" Relationship="Self.FK_STATISTI_RELATIONS_FLO_ORDE" FromRole="Statistic" ToRole="Flo_Order" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="User_Pass" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="User_Status" Type="Boolean" />
+          <Property Name="User_of_Group" Type="Int32" />
+          <NavigationProperty Name="Group" Relationship="Self.FK_Users_Group" FromRole="Users" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="Warehouse_ID" />
+          </Key>
+          <Property Name="Warehouse_ID" Type="Int32" Nullable="false" />
+          <Property Name="Florist_ID" Type="Int32" Nullable="false" />
+          <Property Name="Warehouse_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Warehouse_City" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Warehouse_Address" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Warehouse_Phone" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="Warehouse_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Florist" Relationship="Self.FK_WAREHOUS_RELATIONS_FLORIST" FromRole="Warehouse" ToRole="Florist" />
+        </EntityType>
+        <Association Name="FK_Cust2_Address">
+          <End Role="Address" Type="Self.Address" Multiplicity="0..1" />
+          <End Role="Cust2" Type="Self.Cust2" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Address">
+              <PropertyRef Name="Address_ID" />
+            </Principal>
+            <Dependent Role="Cust2">
+              <PropertyRef Name="Address_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_BOUQUET">
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquet">
+              <PropertyRef Name="Bouquet_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Bouquet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Del_Bouquet">
+          <End Role="Bouquet" Type="Self.Bouquet" Multiplicity="1" />
+          <End Role="Order_Del" Type="Self.Order_Del" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bouquet">
+              <PropertyRef Name="Bouquet_ID" />
+            </Principal>
+            <Dependent Role="Order_Del">
+              <PropertyRef Name="Bouquet_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_CUST2">
+          <End Role="Cust2" Type="Self.Cust2" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cust2">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Del_Customer">
+          <End Role="Cust2" Type="Self.Cust2" Multiplicity="1" />
+          <End Role="Order_Del" Type="Self.Order_Del" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cust2">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Order_Del">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_CUSTOMER">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAYMENT__RELATIONS_CUSTOMER">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Payment_Methods" Type="Self.Payment_Methods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Payment_Methods">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_DRIVER">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Driver_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Driver_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Del_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1" />
+          <End Role="Order_Del" Type="Self.Order_Del" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Driver_ID" />
+            </Principal>
+            <Dependent Role="Order_Del">
+              <PropertyRef Name="Driver_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FLO_ORDE_RELATIONS_FLORIST">
+          <End Role="Florist" Type="Self.Florist" Multiplicity="1" />
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Florist">
+              <PropertyRef Name="Florist_ID" />
+            </Principal>
+            <Dependent Role="Flo_Order">
+              <PropertyRef Name="Florist_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INVOICE_RELATIONS_FLO_ORDE">
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="1" />
+          <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flo_Order">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Invoice">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_STATISTI_RELATIONS_FLO_ORDE">
+          <End Role="Flo_Order" Type="Self.Flo_Order" Multiplicity="1" />
+          <End Role="Statistic" Type="Self.Statistic" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Flo_Order">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Statistic">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Del_Florist">
+          <End Role="Florist" Type="Self.Florist" Multiplicity="1" />
+          <End Role="Order_Del" Type="Self.Order_Del" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Florist">
+              <PropertyRef Name="Florist_ID" />
+            </Principal>
+            <Dependent Role="Order_Del">
+              <PropertyRef Name="Florist_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WAREHOUS_RELATIONS_FLORIST">
+          <End Role="Florist" Type="Self.Florist" Multiplicity="1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Florist">
+              <PropertyRef Name="Florist_ID" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="Florist_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="User_of_Group" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="flowersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Bouquets" EntityType="Self.Bouquet" />
+          <EntitySet Name="Cust2" EntityType="Self.Cust2" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Drivers" EntityType="Self.Driver" />
+          <EntitySet Name="Flo_Order" EntityType="Self.Flo_Order" />
+          <EntitySet Name="Florists" EntityType="Self.Florist" />
+          <EntitySet Name="Groups" EntityType="Self.Group" />
+          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+          <EntitySet Name="Order_Del" EntityType="Self.Order_Del" />
+          <EntitySet Name="Payment_Methods" EntityType="Self.Payment_Methods" />
+          <EntitySet Name="Promedics" EntityType="Self.Promedic" />
+          <EntitySet Name="Statistics" EntityType="Self.Statistic" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Warehouses" EntityType="Self.Warehouse" />
+          <AssociationSet Name="FK_Cust2_Address" Association="Self.FK_Cust2_Address">
+            <End Role="Address" EntitySet="Addresses" />
+            <End Role="Cust2" EntitySet="Cust2" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_BOUQUET" Association="Self.FK_FLO_ORDE_RELATIONS_BOUQUET">
+            <End Role="Bouquet" EntitySet="Bouquets" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Del_Bouquet" Association="Self.FK_Order_Del_Bouquet">
+            <End Role="Bouquet" EntitySet="Bouquets" />
+            <End Role="Order_Del" EntitySet="Order_Del" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_CUST2" Association="Self.FK_FLO_ORDE_RELATIONS_CUST2">
+            <End Role="Cust2" EntitySet="Cust2" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Del_Customer" Association="Self.FK_Order_Del_Customer">
+            <End Role="Cust2" EntitySet="Cust2" />
+            <End Role="Order_Del" EntitySet="Order_Del" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_CUSTOMER" Association="Self.FK_FLO_ORDE_RELATIONS_CUSTOMER">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAYMENT__RELATIONS_CUSTOMER" Association="Self.FK_PAYMENT__RELATIONS_CUSTOMER">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Payment_Methods" EntitySet="Payment_Methods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_DRIVER" Association="Self.FK_FLO_ORDE_RELATIONS_DRIVER">
+            <End Role="Driver" EntitySet="Drivers" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Del_Driver" Association="Self.FK_Order_Del_Driver">
+            <End Role="Driver" EntitySet="Drivers" />
+            <End Role="Order_Del" EntitySet="Order_Del" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FLO_ORDE_RELATIONS_FLORIST" Association="Self.FK_FLO_ORDE_RELATIONS_FLORIST">
+            <End Role="Florist" EntitySet="Florists" />
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INVOICE_RELATIONS_FLO_ORDE" Association="Self.FK_INVOICE_RELATIONS_FLO_ORDE">
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+            <End Role="Invoice" EntitySet="Invoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_STATISTI_RELATIONS_FLO_ORDE" Association="Self.FK_STATISTI_RELATIONS_FLO_ORDE">
+            <End Role="Flo_Order" EntitySet="Flo_Order" />
+            <End Role="Statistic" EntitySet="Statistics" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Del_Florist" Association="Self.FK_Order_Del_Florist">
+            <End Role="Florist" EntitySet="Florists" />
+            <End Role="Order_Del" EntitySet="Order_Del" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WAREHOUS_RELATIONS_FLORIST" Association="Self.FK_WAREHOUS_RELATIONS_FLORIST">
+            <End Role="Florist" EntitySet="Florists" />
+            <End Role="Warehouse" EntitySet="Warehouses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Group" Association="Self.FK_Users_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="flowersModelStoreContainer" CdmEntityContainer="flowersEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="flowersModel.Address">
+              <MappingFragment StoreEntitySet="Address">
+                <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
+                <ScalarProperty Name="Address_Numder_Appartment" ColumnName="Address_Numder_Appartment" />
+                <ScalarProperty Name="Address_Number_Street" ColumnName="Address_Number_Street" />
+                <ScalarProperty Name="Address_Name_Street" ColumnName="Address_Name_Street" />
+                <ScalarProperty Name="Address_City" ColumnName="Address_City" />
+                <ScalarProperty Name="Address_ZIPCODE" ColumnName="Address_ZIPCODE" />
+                <ScalarProperty Name="Address_State" ColumnName="Address_State" />
+                <ScalarProperty Name="Address_Country" ColumnName="Address_Country" />
+                <ScalarProperty Name="Address_line1" ColumnName="Address_line1" />
+                <ScalarProperty Name="Address_line2" ColumnName="Address_line2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bouquets">
+            <EntityTypeMapping TypeName="flowersModel.Bouquet">
+              <MappingFragment StoreEntitySet="Bouquet">
+                <ScalarProperty Name="Bouquet_ID" ColumnName="Bouquet_ID" />
+                <ScalarProperty Name="Bouquet_Name" ColumnName="Bouquet_Name" />
+                <ScalarProperty Name="Bouquet_Price_S" ColumnName="Bouquet_Price_S" />
+                <ScalarProperty Name="Bouquet_Price_M" ColumnName="Bouquet_Price_M" />
+                <ScalarProperty Name="Bouquet_Price_L" ColumnName="Bouquet_Price_L" />
+                <ScalarProperty Name="Bouquet_Size" ColumnName="Bouquet_Size" />
+                <ScalarProperty Name="Bouquet_Pictures" ColumnName="Bouquet_Pictures" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cust2">
+            <EntityTypeMapping TypeName="flowersModel.Cust2">
+              <MappingFragment StoreEntitySet="Cust2">
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address_ID" ColumnName="Address_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="flowersModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+                <ScalarProperty Name="Cust_Fname" ColumnName="Cust_Fname" />
+                <ScalarProperty Name="Cust_Lname" ColumnName="Cust_Lname" />
+                <ScalarProperty Name="Cust_Midname" ColumnName="Cust_Midname" />
+                <ScalarProperty Name="Cust_Email" ColumnName="Cust_Email" />
+                <ScalarProperty Name="Cust_Login" ColumnName="Cust_Login" />
+                <ScalarProperty Name="Cust_Sex" ColumnName="Cust_Sex" />
+                <ScalarProperty Name="Cust_Password" ColumnName="Cust_Password" />
+                <ScalarProperty Name="Cust_Phone" ColumnName="Cust_Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drivers">
+            <EntityTypeMapping TypeName="flowersModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="Driver_ID" ColumnName="Driver_ID" />
+                <ScalarProperty Name="Driver_DLicence" ColumnName="Driver_DLicence" />
+                <ScalarProperty Name="Driver_Fname" ColumnName="Driver_Fname" />
+                <ScalarProperty Name="Driver_Lname" ColumnName="Driver_Lname" />
+                <ScalarProperty Name="Driver_Adress" ColumnName="Driver_Adress" />
+                <ScalarProperty Name="Driver_Phone" ColumnName="Driver_Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Flo_Order">
+            <EntityTypeMapping TypeName="flowersModel.Flo_Order">
+              <MappingFragment StoreEntitySet="Flo_Order">
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Bouquet_ID" ColumnName="Bouquet_ID" />
+                <ScalarProperty Name="Florist_ID" ColumnName="Florist_ID" />
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+                <ScalarProperty Name="Driver_ID" ColumnName="Driver_ID" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Bouquet_Quontity" ColumnName="Bouquet_Quontity" />
+                <ScalarProperty Name="Date_a206yuriyed" ColumnName="Date_a206yuriyed" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Florists">
+            <EntityTypeMapping TypeName="flowersModel.Florist">
+              <MappingFragment StoreEntitySet="Florist">
+                <ScalarProperty Name="Florist_ID" ColumnName="Florist_ID" />
+                <ScalarProperty Name="Frorist_Fname" ColumnName="Frorist_Fname" />
+                <ScalarProperty Name="Frorist_Lname" ColumnName="Frorist_Lname" />
+                <ScalarProperty Name="Frorist_Address" ColumnName="Frorist_Address" />
+                <ScalarProperty Name="Frorist_Phone" ColumnName="Frorist_Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="flowersModel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name_Group" ColumnName="Name_Group" />
+                <ScalarProperty Name="isEnable" ColumnName="isEnable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="flowersModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="Invoice_ID" ColumnName="Invoice_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Invoice_Total" ColumnName="Invoice_Total" />
+                <ScalarProperty Name="DateOfIssue" ColumnName="DateOfIssue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_Del">
+            <EntityTypeMapping TypeName="flowersModel.Order_Del">
+              <MappingFragment StoreEntitySet="Order_Del">
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Bouquet_ID" ColumnName="Bouquet_ID" />
+                <ScalarProperty Name="Florist_ID" ColumnName="Florist_ID" />
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+                <ScalarProperty Name="Driver_ID" ColumnName="Driver_ID" />
+                <ScalarProperty Name="Order_Date" ColumnName="Order_Date" />
+                <ScalarProperty Name="Bouquet_Quontity" ColumnName="Bouquet_Quontity" />
+                <ScalarProperty Name="Date_Delived" ColumnName="Date_Delived" />
+                <ScalarProperty Name="Order_Status" ColumnName="Order_Status" />
+                <ScalarProperty Name="Total_Price" ColumnName="Total_Price" />
+                <ScalarProperty Name="Size_Bouquets" ColumnName="Size_Bouquets" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payment_Methods">
+            <EntityTypeMapping TypeName="flowersModel.Payment_Methods">
+              <MappingFragment StoreEntitySet="Payment_Methods">
+                <ScalarProperty Name="PM_ID" ColumnName="PM_ID" />
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+                <ScalarProperty Name="card_number" ColumnName="card_number" />
+                <ScalarProperty Name="date_from" ColumnName="date_from" />
+                <ScalarProperty Name="CVV" ColumnName="CVV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promedics">
+            <EntityTypeMapping TypeName="flowersModel.Promedic">
+              <MappingFragment StoreEntitySet="Promedic">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="LName" ColumnName="LName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statistics">
+            <EntityTypeMapping TypeName="flowersModel.Statistic">
+              <MappingFragment StoreEntitySet="Statistic">
+                <ScalarProperty Name="Stat_ID" ColumnName="Stat_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Sold" ColumnName="Sold" />
+                <ScalarProperty Name="Return" ColumnName="Return" />
+                <ScalarProperty Name="Investigation" ColumnName="Investigation" />
+                <ScalarProperty Name="Stat_Date" ColumnName="Stat_Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="flowersModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="User_Name" ColumnName="User_Name" />
+                <ScalarProperty Name="User_Pass" ColumnName="User_Pass" />
+                <ScalarProperty Name="User_Status" ColumnName="User_Status" />
+                <ScalarProperty Name="User_of_Group" ColumnName="User_of_Group" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouses">
+            <EntityTypeMapping TypeName="flowersModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="Warehouse_ID" ColumnName="Warehouse_ID" />
+                <ScalarProperty Name="Florist_ID" ColumnName="Florist_ID" />
+                <ScalarProperty Name="Warehouse_Name" ColumnName="Warehouse_Name" />
+                <ScalarProperty Name="Warehouse_City" ColumnName="Warehouse_City" />
+                <ScalarProperty Name="Warehouse_Address" ColumnName="Warehouse_Address" />
+                <ScalarProperty Name="Warehouse_Phone" ColumnName="Warehouse_Phone" />
+                <ScalarProperty Name="Warehouse_Email" ColumnName="Warehouse_Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

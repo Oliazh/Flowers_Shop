@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Flowers_web.Models.Order_Del>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bouquet_Quontity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date_Delived)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total_Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Size_Bouquets)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bouquet.Bouquet_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cust2.Fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Driver.Driver_DLicence)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Florist.Frorist_Fname)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bouquet_Quontity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date_Delived)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order_Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total_Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size_Bouquets)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bouquet.Bouquet_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cust2.Fname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Driver.Driver_DLicence)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Florist.Frorist_Fname)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Order_ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Order_ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Order_ID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

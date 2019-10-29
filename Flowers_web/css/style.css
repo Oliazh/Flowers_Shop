@@ -1,0 +1,45 @@
+﻿
+#SignIn {
+    background-image: url("../Image/Light-Purple-Floral-haze.jpg");
+    background-repeat: no-repeat;
+    height: 700px;
+    background-size: cover;
+    text-align: center;
+    padding: 35px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+    #SignIn > h1 {
+        position: absolute;
+        right: 430px;
+        color: royalblue;
+    }
+
+    #SignIn > img {
+        position: absolute;
+        left: 70px;
+        top: 20px;
+    }
+
+#log1 {
+    float: right;
+    position: absolute;
+    right: 220px;
+    top: 100px;
+}
+
+#log2 {
+    float: right;
+    position: absolute;
+    right: 220px;
+    top: 400px;
+}
+
+#Call {
+    background-image: url("./img/Home3.jpg");
+    background-repeat: no-repeat;
+    height: 700px;
+    background-size: cover;
+}

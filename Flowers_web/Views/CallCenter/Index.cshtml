@@ -1,0 +1,406 @@
+﻿@using System.Web.UI.WebControls
+@using Flowers_web.Models
+@using Flowers_web.Controllers
+@model Flowers_web.Models.CallCenter
+
+
+
+@{
+    int id2 = 0;
+    ViewBag.Title = "Index";
+
+}
+<link rel="stylesheet" href="~/css/style.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<script type="text/javascript">
+    //var currentValue = 0;
+    function onRadio() {
+        $('input[type=radio][name=Edit]').change(function () {
+            //alert(this.value);
+           // $("#Order_Id").attr("value", this.value);
+            $("#text2").val(this.value);
+        })
+    }
+    function handleClick(myRadio) {
+      //  alert('Old value: ' + currentValue);
+      //  alert('New value: ' + myRadio.value);
+      //  currentValue = myRadio.value;
+        $("#Order_ID").val(myRadio.value);
+    }
+    $(document).ready(function () {
+
+       
+     
+        
+
+        $("#SearchPhone").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/CallCenter/FindUsers",
+                    type: "POST",
+                    dataType: "json",
+                    data: { Prefix: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return {
+
+                                value: item.Phone,
+                                Cust_ID: item.Cust_ID,
+                                Fname: item.Fname,
+                                Lname: item.Lname,
+                                Email: item.Email,
+                                AddressID: item.AddressID,
+                                Gender: item.Gender,
+                                Address_Numder_Appartment: item.Address_Numder_Appartment,
+                                Address_Number_Street: item.Address_Number_Street,
+                                Address_Name_Street: item.Address_Name_Street,
+                                Address_State: item.Address_State,
+                                Address_ZIPCODE: item.Address_ZIPCODE,
+                                Address_City: item.Address_City,
+                                Address_Country: item.Address_Country,
+                                
+
+                                                };
+
+                        }))
+                    }
+                })
+
+            },
+
+            messages: {
+                noResults: "", results: ""
+            },
+            select: function (even, ui) {
+
+                $("#FindUser").val(ui.item.Lname);
+                $("#Fname").val(ui.item.Fname);
+                $("#Email").val(ui.item.Email);
+                $("#Phone").val(ui.item.value);
+                $("#Gender").select(ui.item.Gender);
+                $("#Address_Numder_Appartment").val(ui.item.Address_Numder_Appartment);
+                $("#Address_Number_Street").val(ui.item.Address_Number_Street);
+                $("#Address_Name_Street").val(ui.item.Address_Name_Street);
+                $("#Address_State").val(ui.item.Address_State);
+                $("#Address_ZIPCODE").val(ui.item.Address_ZIPCODE);
+                //document.getElementsByName('Address_ZIPCODE')[0].placeholder = ui.item.Address_ZIPCODE;
+                $("#Address_City").val(ui.item.Address_City);
+                $("#Address_Country").val(ui.item.Address_Country);
+                $("#LBCustID").text(ui.item.Cust_ID);
+                $("#Order_ID").val("0");
+
+                $.ajax({
+                    url: "/CallCenter/Index2",
+                    dataType: "json",
+                    cache: false,
+                    type: 'POST',
+                    data: { CustIDx: $("#LBCustID").text() },
+                    success: function (result) {
+
+
+                        var table = $("#t01");
+                        $("#t01 tr").remove(); 
+                        $("#t01 thead").remove(); 
+                        table.append("<thead> <th>Order_ID</th><th>Order Status</th><th>Cust Name</th><th>Cust ID</th></thead>");
+                        $.each(result, function (idx, elem) {
+                           table.append("<tr><td>" + elem.Order_ID + "</td><td>"
+                                + elem.Order_Status + "</td><td>"
+                                + elem.Name + "</td><td>"
+                                + elem.Cust_ID + "</td><td>"
+                                + "<input onclick='handleClick(this)' id ='Order" + elem.Order_ID + "'  class = 'OrderEdit'  name='Edit' type = 'radio' value ='" + elem.Order_ID + "' />"
+                                                     );
+                            });
+
+                    }
+                })
+
+            }
+
+        });
+
+
+
+        getBouket();
+    })
+
+
+    function GetSampleUsersList() {
+        var userDetails = {};
+        var usersList = [];
+        for (var i = 1; i <= 3; i++) {
+            userDetails["Cust_ID"] = i;
+            userDetails["Fname"] = "User- " + i;
+            usersList.push(userDetails);
+        }
+        return JSON.stringify(usersList);
+    }
+
+    function getBouket() {
+
+        var cmbBouqets = '@Html.IdFor(o => o.ComboBouqets)';
+        var cmbSizes = '@Html.IdFor(o => o.ComboSizes)';
+        var cmbQ = '@Html.IdFor(o => o.ComboQuantities)';
+
+        var image = "";
+        var priceS = 0;
+        var priceM = 0;
+        var priceL = 0;
+        var sum = 0;
+        var dropdownBq = document.getElementById(cmbBouqets);
+        var dropdownSz = document.getElementById(cmbSizes);
+        var dropdownQ = document.getElementById(cmbQ);
+        var valueBouq = dropdownBq.options[dropdownBq.selectedIndex].value;
+        var valueSize = dropdownSz.options[dropdownSz.selectedIndex].value;
+        var valueQ = dropdownQ.options[dropdownQ.selectedIndex].value;
+        @{
+            int idBouqet = Convert.ToInt32(Model.ComboBouqets);
+            string imageSrc = "";
+            string imageBase64 = "";
+            byte[] array = null;
+        }
+        if (valueBouq == "1") {
+
+            @{
+
+                array = Model.Bouquets.Where(d => d.Bouquet_ID == 1).FirstOrDefault().Bouquet_Pictures;
+                imageBase64 = Convert.ToBase64String(array);
+
+        }
+            image =@Html.Raw(Json.Encode(string.Format("data:image/png;base64,{0}", imageBase64)));
+            $("#ImageControl").attr("src", image);
+        }
+        else if (valueBouq == "2") {
+            @{
+                array = Model.Bouquets.Where(d => d.Bouquet_ID == 2).FirstOrDefault().Bouquet_Pictures;
+                imageBase64 = Convert.ToBase64String(array);
+
+            }
+            image =@Html.Raw(Json.Encode(string.Format("data:image/png;base64,{0}", imageBase64)));
+            $("#ImageControl").attr("src", image);
+        } else if (valueBouq == "3") {
+           @{
+               array = Model.Bouquets.Where(d => d.Bouquet_ID == 3).FirstOrDefault().Bouquet_Pictures;
+               imageBase64 = Convert.ToBase64String(array);
+               imageSrc = string.Format("data:image/png;base64,{0}", imageBase64);
+           }
+            image =@Html.Raw(Json.Encode(string.Format("data:image/png;base64,{0}", imageBase64)));
+            $("#ImageControl").attr("src", image);
+        }
+        if (valueSize == "S") {
+
+            if (valueBouq == "1") {
+                priceM = @Html.Raw(Json.Encode(Model.Bouquets?.FirstOrDefault(f => f.Bouquet_ID == 1)?.Bouquet_Price_S));
+            } else if (valueBouq == "2") {
+                priceM = @Html.Raw(Json.Encode(Model.Bouquets?.FirstOrDefault(f => f.Bouquet_ID == 2)?.Bouquet_Price_S));
+            } else if (valueBouq == "3") {
+                priceM = @Html.Raw(Json.Encode(Model.Bouquets?.FirstOrDefault(f => f.Bouquet_ID == 3)?.Bouquet_Price_S));
+            }
+            sum = valueQ * priceM;
+        } else if (valueSize == "M") {
+            if (valueBouq == "1") {
+                priceM = @Html.Raw(Json.Encode(Model.Bouquets?.FirstOrDefault(f => f.Bouquet_ID == 1)?.Bouquet_Price_M));
+            } else if (valueBouq == "2") {
+                priceM = @Html.Raw(Json.Encode(Model.Bouquets?.FirstOrDefault(f => f.Bouquet_ID == 2)?.Bouquet_Price_M));
+            } else if (valueBouq == "3") {
+                priceM = @Html.Raw(Json.Encode(Model.Bouquets?.FirstOrDefault(f => f.Bouquet_ID == 3)?.Bouquet_Price_M));
+            }
+            sum = valueQ * priceM;
+
+        } else if (valueSize == "L") {
+            if (valueBouq == "1") {
+                priceL = @Html.Raw(Json.Encode(Model.Bouquets?.FirstOrDefault(f => f.Bouquet_ID == 1)?.Bouquet_Price_L));
+            } else if (valueBouq == "2") {
+                priceL = @Html.Raw(Json.Encode(Model.Bouquets?.FirstOrDefault(f => f.Bouquet_ID == 2)?.Bouquet_Price_L));
+            } else if (valueBouq == "3") {
+                priceL = @Html.Raw(Json.Encode(Model.Bouquets?.FirstOrDefault(f => f.Bouquet_ID == 3)?.Bouquet_Price_L));
+
+            }
+            sum = valueQ * priceL;
+
+
+        }
+
+        $("#Sum").attr("value", sum);
+
+    }
+
+
+</script>
+<h2>Index</h2>
+<br />
+@using (Html.BeginForm("Calculate", "CallCenter", FormMethod.Post))
+{
+
+    
+    @Html.HiddenFor(x => x.Order_ID)
+    @*<input type="text" id="text2"/>*@
+    <div style="border-style:ridge">
+        <div id="abc">
+            <p>
+                <label>Search Customer by phone number:</label>
+                <input type="text" id="SearchPhone" />
+
+
+            </p>
+        </div>
+    </div>
+    <br />
+
+
+    <div style="border-style:ridge">
+
+        <img id="ImageControl" width="100" height="100" />
+        <div class="dropdown">
+            @Html.LabelFor(d => d.ComboBouqets, "Boucket")
+
+            @Html.DropDownListFor(model => model.ComboBouqets,
+         new SelectList(Model.Bouquets, "Bouquet_ID", "Bouquet_Name") as SelectList, new { onchange = "getBouket();" , @class = "dropdown-item", style=" width : 150px; "})
+        </div>
+        <br />
+        @Html.LabelFor(d => d.ComboSizes, "Size")
+        <div class="dropdown">
+            @Html.DropDownListFor(model => model.ComboSizes,
+         new SelectList(Model.Sizes) as SelectList, new { onchange = "getBouket();", @class = "dropdown-item", style = " width : 60px; " })
+        </div><br />
+        <div class="dropdown">
+            @Html.LabelFor(d => d.ComboQuantities, "Quantity")
+            @Html.DropDownListFor(model => model.ComboQuantities,
+         new SelectList(Model.Quantities) as SelectList, new { onchange = "getBouket();", @class = "dropdown-item", style = " width : 70px; " })
+        </div><br />
+        <div class="dropdown">
+            @Html.LabelFor(d => d.Sum, "Price:")
+            @Html.TextBoxFor(d => d.Sum, new { @class = "dropdown-item", style = " width : 70px; " })
+        </div>
+        @*@Html.Label("sum", new { id = "sum" })*@
+        <br />
+        @Html.LabelFor(d => d.DateDelivery, "DateDelivery")
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateDelivery, new { @Value = @DateTime.Now.ToShortDateString() })
+            @Html.ValidationMessageFor(model => model.DateDelivery)
+        </div>
+
+
+
+    </div>
+        <br />
+        <div style="border-style:ridge">
+            @Html.LabelFor(d => d.Address_ZIPCODE, "Address and ZIPCODE:", new { @class = "control-label col-md-2"})
+            @Html.TextBoxFor(d => d.Address_ZIPCODE, new { @class = "control-label col-md-2", @placeholder = "test" })
+            <br />
+            <br />
+            @Html.LabelFor(d => d.Address_Numder_Appartment, "Appartment_Numder:", new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(d => d.Address_Numder_Appartment, new { @class = "control-label col-md-2" })
+            <br />
+            <br />
+            @Html.LabelFor(d => d.Address_Number_Street, "Street_Number:", new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(d => d.Address_Number_Street, new { @class = "control-label col-md-2" })
+            <br />
+            <br />
+            @Html.LabelFor(d => d.Address_Name_Street, "Address_Name_Street:", new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(d => d.Address_Name_Street, new { @class = "control-label col-md-2" })
+            <br />
+            <br />
+            @Html.LabelFor(d => d.Address_City, "Address_City:", new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(d => d.Address_City, new { @class = "control-label col-md-2" })
+            <br />
+            <br />
+            @Html.LabelFor(d => d.Address_State, "Address_State:", new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(d => d.Address_State, new { @class = "control-label col-md-2" })
+            <br />
+            <br />
+            @Html.LabelFor(d => d.Address_Country, "Address_Country:", new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(d => d.Address_Country, new { @class = "control-label col-md-2" })
+            <br />
+            <br />
+            @Html.LabelFor(d => d.Address_line1, "Address_line1:", new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(d => d.Address_line1, new { @class = "control-label col-md-2" })
+            <br />
+            <br />
+            @Html.LabelFor(d => d.Address_line2, "Address_line2:", new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(d => d.Address_line2, new { @class = "control-label col-md-2" })
+            <br />
+
+        </div>
+        <br />
+        <div style="border-style:ridge">
+
+            <h4>User</h4>
+            <hr />
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.Client.Lname, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.EditorFor(model => model.Client.Lname, new { htmlAttributes = new { @id = "FindUser", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Client.Lname, "", new { @class = "text-danger" })
+
+
+            @Html.LabelFor(model => model.Client.Fname, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.EditorFor(model => model.Client.Fname, new { htmlAttributes = new { @id = "Fname", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Client.Fname, "", new { @class = "text-danger" })
+
+
+            @Html.LabelFor(model => model.Client.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            <div class="checkbox">
+                @Html.DropDownList("Gender", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="Mr", Value = "0" },
+                    new SelectListItem{ Text="Mrs", Value = "1" }
+                })
+                @Html.ValidationMessageFor(model => model.Client.Gender, "", new { @class = "text-danger" })
+            </div>
+
+
+            @Html.LabelFor(model => model.Client.Email, "Email", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.EditorFor(model => model.Client.Email, new { htmlAttributes = new { @id = "Email", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Client.Email, "", new { @class = "text-danger" })
+
+
+            @Html.LabelFor(model => model.Client.Phone, "Phone", htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @Html.EditorFor(model => model.Client.Phone, new { htmlAttributes = new { @id = "Phone", @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Client.Email, "", new { @class = "text-danger" })
+
+
+        </div>
+
+        <input type="submit" value="Send to DB" />
+        <hr />
+        <h4>ID Cust:</h4><label id="LBCustID">_</label>
+
+        <div>
+
+            <table id="t01" class="table table-dark">
+
+                <thead>
+                <th>Order_ID</th>
+                <th>Order Status</th>
+                <th>Cust Name</th>
+                <th>Cust ID</th>
+                </thead>
+
+            </table>
+
+
+
+
+
+        </div>
+        <link rel="stylesheet" type="text/css" href="http://ws1.postescanada-canadapost.ca/css/addresscomplete-2.30.min.css?key=bd69-ne39-uy77-zr44" />
+        <script type="text/javascript" src="http://ws1.postescanada-canadapost.ca/js/addresscomplete-2.30.min.js?key=bd69-ne39-uy77-zr44"></script>
+        }
+
+
+
+
+
+
+
+

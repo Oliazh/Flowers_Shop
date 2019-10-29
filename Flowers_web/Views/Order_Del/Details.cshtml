@@ -1,0 +1,106 @@
+﻿@model Flowers_web.Models.Order_Del
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Order_Del</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Order_Date)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Order_Date)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Bouquet_Quontity)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Bouquet_Quontity)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Date_Delived)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Date_Delived)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Order_Status)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Order_Status)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Total_Price)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Total_Price)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Size_Bouquets)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Size_Bouquets)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Bouquet.Bouquet_Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Bouquet.Bouquet_Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Cust2.Fname)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Cust2.Fname)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Driver.Driver_DLicence)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Driver.Driver_DLicence)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Florist.Frorist_Fname)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Florist.Frorist_Fname)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Order_ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
