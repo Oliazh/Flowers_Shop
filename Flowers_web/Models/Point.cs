@@ -237,7 +237,7 @@ namespace Flowers_web.Models
             //& AV4 & "|" & AV5 & "|" & AV6 & "|" & AV7 & "|" & AV8 & "|" & AV9 & "|" & AV10 & "|" & AV11 & "|" & AV12 & "|" & AV13 &
             //"|" & AV14 & "|" & AV15 & "|" & AV16 & "|" & AV17 & "|" & AV18 & "|" & AV19 & "|" & AV20 & "|" & AV21 & "|" & AV22 & "|"
             //& AV23 & "|" & AV24 & "|" & AV25 & "|" & AV26 & "|" & AV27 & "|" & AV28 & "" & AV29 & "|" & AV30 &
-            //"|&key=AIzaSyBEnVr56lRcRHGGX31OV8_Sj2AI1zzgekk";"//end_address
+            //"|&key=";"//end_address
 
             string warehouse = "4095 Belgreen Dr, Ottawa, ON K1G 3N2";
             string q =
@@ -245,13 +245,13 @@ namespace Flowers_web.Models
             //& AV4 & "|" & AV5 & "|" & AV6 & "|" & AV7 & "|" & AV8 & "|" & AV9 & "|" & AV10 & "|" & AV11 & "|" & AV12 & "|" & AV13 & "|"
             //& AV14 & "|" & AV15 & "|" & AV16 & "|" & AV17 & "|" & AV18 & "|" & AV19 & "|" & AV20 & "|" & AV21 & "|" & AV22 & "|" & AV23 &
             //"|" & AV24 & "|" & AV25 & "|" & AV26 & "|" & AV27 & "|" & AV28 & "" & AV29 & "|" & AV30 &
-            //"|&key=AIzaSyBEnVr56lRcRHGGX31OV8_Sj2AI1zzgekk"; "//end_address"
+            //"|&"; "//end_address"
             foreach (var dr1 in zips)
             {
                 q += $"|{dr1}|";
             }
 
-            return q += "&key=AIzaSyBEnVr56lRcRHGGX31OV8_Sj2AI1zzgekk";
+            return q += "&key=";
 
 
         }
